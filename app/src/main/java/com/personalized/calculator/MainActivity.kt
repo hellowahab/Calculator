@@ -1,3 +1,6 @@
+/*
+ * https://studyviewer.com/android-calculator-in-kotlin-using-android-studio/
+ */
 package com.personalized.calculator
 
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +13,7 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var outputTextView: TextView
+    //lateinit var outputTextView: TextView
     var lastNumaric: Boolean= false
     var stateError: Boolean = false
     var lastDot :Boolean=false
@@ -21,12 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     fun onDigit(view: View)
     {
+        val textView: TextView = findViewById(R.id.textView2) as TextView
         if(stateError)
         {
-            outputTextView.text=(view as Button).text
+            textView.text=(view as Button).text
             stateError=false
         }else {
-            outputTextView.append((view as Button).text)
+            textView.append((view as Button).text)
         }
         lastNumaric=true
     }
@@ -35,7 +39,8 @@ class MainActivity : AppCompatActivity() {
     {
         if(lastNumaric && !stateError && !lastDot)
         {
-            outputTextView.append(".")
+            val textView: TextView = findViewById(R.id.textView2) as TextView
+            textView.append(".")
             lastNumaric=false
             lastDot=true
         }
@@ -45,7 +50,8 @@ class MainActivity : AppCompatActivity() {
     {
         if(lastNumaric && !stateError)
         {
-            outputTextView.append((view as Button).text)
+            val textView: TextView = findViewById(R.id.textView2) as TextView
+            textView.append((view as Button).text)
             lastNumaric=false
             lastDot=false
         }
@@ -54,26 +60,27 @@ class MainActivity : AppCompatActivity() {
 
     fun onClear(view: View)
     {
-        this.outputTextView.text= ""
+        val textView: TextView = findViewById(R.id.textView2) as TextView
+        textView.text = ""
         lastNumaric=false
         stateError=false
         lastDot=false
     }
     fun onEqual(view: View)
     {
-
+        val textView: TextView = findViewById(R.id.textView2) as TextView
         if(lastNumaric && !stateError)
         {
-            val text = outputTextView.text.toString()
+            val text = textView.text.toString()
             val expression= ExpressionBuilder(text).build()
             try
             {
                 val result= expression.evaluate()
-                outputTextView.text= result.toString()
+                textView.text= result.toString()
                 lastDot=true
             }catch (ex:Exception)
             {
-                outputTextView.text="Error"
+                textView.text="Error"
                 stateError=true
                 lastNumaric=false
             }
