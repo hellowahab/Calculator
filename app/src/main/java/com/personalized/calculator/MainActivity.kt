@@ -1,6 +1,8 @@
 /*
  * https://studyviewer.com/android-calculator-in-kotlin-using-android-studio/
  * https://developer.android.com/studio/run
+ * App ICon: https://www.iconfinder.com/icons/171352/calculator_icon
+ *
  */
 package com.personalized.calculator
 
